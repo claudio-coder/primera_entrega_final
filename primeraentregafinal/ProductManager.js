@@ -60,7 +60,7 @@ export class ProductManager {
     }
 
     await fs.promises.writeFile(this.path, JSON.stringify(products));
-    return products;
+    return product;
   }
 
   async getProducts() {
@@ -74,11 +74,8 @@ export class ProductManager {
     const productWithSimilarId = products.find(
       (aProduct) => aProduct.id === productId
     );
-    if (productWithSimilarId === undefined) {
-      // console.error("Not found");
-      throw new Error("Product Not Found");
-    }
-    console.log(productWithSimilarId);
+
+    if (!productWithSimilarId) throw new Error("Product not found");
     return productWithSimilarId;
   }
 
@@ -101,7 +98,7 @@ export class ProductManager {
     products[productIdx] = newProduct;
 
     await fs.promises.writeFile(this.path, JSON.stringify(products));
-    return products;
+    return newProduct;
   }
 
   async deleteProduct(productId) {
@@ -118,7 +115,6 @@ export class ProductManager {
     products.splice(productIdx, 1);
 
     await fs.promises.writeFile(this.path, JSON.stringify(products));
-    return products;
   }
 }
 
@@ -132,3 +128,7 @@ export class ProductManager {
 //   "oldpri15K",
 //   28
 // );
+
+// const miProductManager = new ProductManager("./carts.json");
+
+// miProductManager.addCart();
