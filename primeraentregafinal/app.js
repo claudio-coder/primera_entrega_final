@@ -1,21 +1,35 @@
 import express from "express";
 import fs from "fs";
-import { CartManager } from "./CartManager.js";
-
-const PORT = 8080;
-const app = express();
+import { Server } from "socket.io";
+import { CartManager } from "../src/CartManager.js";
 import { ProductManager } from "./ProductManager.js";
 import { CARTS_URL, CART_BY_ID_URL, UPDATE_CART_URL } from "./routes/carts.js";
 import { PRODUCTS_URL, PRODUCT_BY_ID_URL } from "./routes/products.js";
+import handlebars from "express-handlebars";
+import viewsRouter from "./routes/views.router.js";
 
+const PORT = 8080;
+const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+const httpServer = app.listen(PORT, () => {
+  console.log(`Escuchando el puerto : ${PORT}`);
+});
+const socketServer = new Server(httpServer);
+
+app.engine("handlebars", handlebars);
+app.set("views", __dirname + "/views");
+app.set("view engine", "handlebars");
+app.use(express.static(__dirname + "/public"));
+app.use("/", viewsRouter);
+
+socketServer.on("connection", (socket) => {
+  console.log("nuevo cliente conectado");
+});
+
 const productManager = new ProductManager("./products.json");
 const cartManager = new CartManager("./carts.json", productManager);
-
-app.get("/", (req, res) => {
-  res.status(200).send("<h1>Estas Conectado</h1>");
-});
 
 app.get(PRODUCTS_URL, async (req, res) => {
   try {
@@ -123,8 +137,4 @@ app.post(UPDATE_CART_URL, async (req, res) => {
   } catch (error) {
     return res.send({ status: "error", error: error.message });
   }
-});
-
-app.listen(PORT, () => {
-  console.log(`Escuchando el puerto : ${PORT}`);
 });
