@@ -1,0 +1,22 @@
+GET http://localhost:8080/api/products
+
+###
+POST http://localhost:8080/api/products
+Content-Type: application/json
+
+{
+  "title": "BUENA ABUNDANTE COMIDA",
+  "description": "Comida para GATOS",
+  "category": "alimento"
+}
+###
+PUT http://localhost:8080/api/products/645bf99ae591c34b366d8123
+Content-Type: application/json
+
+{
+  "title": "BUENA ABUNDANTE para jirafas",
+  "description": "Comida para peces",
+  "category": "alimento"
+}
+###
+DELETE http://localhost:8080/api/products/645bf99ae591c34b366d8123
