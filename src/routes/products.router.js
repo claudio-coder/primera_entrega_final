@@ -24,14 +24,13 @@ router.get("/", async (req, res) => {
 
     const sortParam = req.query.sort;
 
-    // let products = await productModel.aggregate([{ $sort: { price: -1 } }]);
     let products = await productModel.paginate(
       {},
       {
         limit: !!limit ? limit : 10,
         page: !!page ? page : 1,
         lean: true,
-        sort: { price: SORT[sortParam] },
+        sort: !!SORT[sortParam] ? { price: SORT[sortParam] } : undefined,
       }
     );
     const {
@@ -44,7 +43,7 @@ router.get("/", async (req, res) => {
       prevLink,
       nextLink,
     } = products;
-    // res.render("user", {
+    // res.render("product", {
     res.send({
       status: "success",
       products: docs,
