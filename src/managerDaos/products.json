@@ -1,6 +1,5 @@
 [
     {
-        "id": 0,
         "title": "Purina Exellent 10kg",
         "description": "Comida para Perros",
         "price": 5490,
@@ -11,7 +10,6 @@
         "stock": 71
     },
     {
-        "id": 1,
         "title": "Purina Exellent 20kg",
         "description": "Comida para Perros",
         "price": 10490,
@@ -22,7 +20,6 @@
         "stock": 13
     },
     {
-        "id": 2,
         "title": "Purina Exellent 5kg",
         "description": "Comida para Perros",
         "price": 2290,
@@ -33,7 +30,6 @@
         "stock": 19
     },
     {
-        "id": 3,
         "title": "Purina Exellent Adult Cat 20kg",
         "description": "Comida para Gatos",
         "price": 12230,
@@ -44,7 +40,6 @@
         "stock": 27
     },
     {
-        "id": 4,
         "title": "Purina Exellent Adult Cat 10kg",
         "description": "Comida para Gatos",
         "price": 7490,
@@ -55,7 +50,6 @@
         "stock": 12
     },
     {
-        "id": 5,
         "title": "Purina Exellent Adult Cat 5kg",
         "description": "Comida para Gatos",
         "price": 4290,
@@ -66,7 +60,6 @@
         "stock": 18
     },
     {
-        "id": 6,
         "title": "Old Prince 20kg",
         "description": "Comida para Gatos",
         "price": 14270,
@@ -77,7 +70,6 @@
         "stock": 124
     },
     {
-        "id": 7,
         "title": "Old Prince 10kg",
         "description": "Comida para Gatos",
         "price": 7690,
@@ -88,7 +80,6 @@
         "stock": 30
     },
     {
-        "id": 8,
         "title": "Old Prince 5kg",
         "description": "Comida para Gatos",
         "price": 5690,
@@ -99,7 +90,6 @@
         "stock": 22
     },
     {
-        "id": 9,
         "title": "Old Prince 1,5kg",
         "description": "Comida para Gatos",
         "price": 2690,
@@ -110,7 +100,6 @@
         "stock": 28
     },
     {
-        "id": 10,
         "title": "Old Prince 15kg",
         "description": "Comida para Gatos",
         "price": 9660,
@@ -121,7 +110,6 @@
         "stock": 28
     },
     {
-        "id": 11,
         "title": "saraza",
         "description": "descripcion saraza",
         "price": "saraza",
@@ -132,7 +120,6 @@
         "stock": "saraza"
     },
     {
-        "id": 12,
         "title": "Purina Exellent Adult Cat 25kg ejemplo",
         "description": "Comida para Gatos",
         "price": 12230,
@@ -143,7 +130,6 @@
         "stock": 27
     },
     {
-        "id": 13,
         "title": "Purina Exellent Adult Cat 25kg ejemplo",
         "description": "Comida para Gatos",
         "price": 12230,
@@ -154,7 +140,6 @@
         "stock": 27
     },
     {
-        "id": 14,
         "title": "Purina Exellent Adult Cat 25kg ejemplo",
         "description": "Comida para Gatos",
         "price": 12230,
@@ -165,7 +150,6 @@
         "stock": 27
     },
     {
-        "id": 15,
         "title": "Purina Exellent Adult Cat 25kg ejemplo",
         "description": "Comida para Gatos",
         "price": 12230,
@@ -176,7 +160,6 @@
         "stock": 27
     },
     {
-        "id": 16,
         "title": "Purina Exellent Adult Cat 25kg ejemplo",
         "description": "Comida para Gatos",
         "price": 12230,
@@ -187,7 +170,6 @@
         "stock": 27
     },
     {
-        "id": 17,
         "title": "Purina Exellent Adult Cat 25kg ejemplo",
         "description": "Comida para Gatos",
         "price": 12230,

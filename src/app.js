@@ -1,19 +1,19 @@
 import express from "express";
 import cookieParser from "cookie-parser";
 import productsRouter from "./routes/products.router.js";
-// import usersRouter from "./routes/users.router.js";
+import usersRouter from "./routes/users.router.js";
 import { Server } from "socket.io";
 import cartsRouter from "./routes/carts.router.js";
 import handlebars from "express-handlebars";
 import viewsRouter from "./routes/views.router.js";
-import __dirname from "./utils.js";
-import { ProductManager } from "./ProductManager.js";
+import { ProductManager } from "./managerDaos/ProductManager.js";
 import { connectDB } from "./config/objectConfig.js";
+import __dirname from "./dirname.js";
 
 const PORT = 8080;
 const app = express();
 
-const productManager = new ProductManager("./src/products.json");
+const productManager = new ProductManager("./src/managerDaos/products.json");
 
 const httpServer = app.listen(PORT, () => {
   console.log(`Escuchando el puerto : ${PORT}`);
@@ -34,7 +34,7 @@ app.use(cookieParser());
 app.use("/static", express.static(__dirname + "/public"));
 
 app.use("/api/products", productsRouter);
-// app.use("/api/usuarios", usersRouter);
+app.use("/api/usuarios", usersRouter);
 app.use("/api/carts", cartsRouter);
 app.use("/", viewsRouter);
 

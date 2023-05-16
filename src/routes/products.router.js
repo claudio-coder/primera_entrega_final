@@ -1,37 +1,88 @@
 import { Router } from "express";
-import { ProductManager } from "../ProductManager.js";
-import { io } from "../app.js";
+// import { ProductManager } from "../managerDaos/ProductManager.js";
+// import { io } from "../app.js";
 import { productModel } from "../models/product.model.js";
 
-const productManager = new ProductManager("./src/products.json");
+// const productManager = new ProductManager("./src/managerDaos/products.json");
 
 const router = Router();
 
+const SORT = { asc: 1, desc: -1 };
+
 router.get("/", async (req, res) => {
   try {
-    let products = await productModel.find();
-    console.log(products);
+    // let users = await userModel.find().explain("executionStatus");
+    // let users = await userModel.find({ first_name: "Celia" });
+    // console.log(users[0].id.toString());
+    // let users = await userModel.find({});
+    // const { page = 1 } = req.query;
+    // const page = req.query.page;
+
+    const limit = req.query.limit;
+
+    const page = req.query.page;
+
+    const sortParam = req.query.sort;
+
+    // let products = await productModel.aggregate([{ $sort: { price: -1 } }]);
+    let products = await productModel.paginate(
+      {},
+      {
+        limit: !!limit ? limit : 10,
+        page: !!page ? page : 1,
+        lean: true,
+        sort: { price: SORT[sortParam] },
+      }
+    );
+    const {
+      docs,
+      totalPages,
+      hasPrevPage,
+      hasNextPage,
+      prevPage,
+      nextPage,
+      prevLink,
+      nextLink,
+    } = products;
+    // res.render("user", {
     res.send({
       status: "success",
-      payload: products,
+      products: docs,
+      totalPages,
+      prevPage,
+      nextPage,
+      hasPrevPage,
+      hasNextPage,
+      prevLink,
+      nextLink,
     });
   } catch (error) {
     console.log(error);
   }
-
-  // try {
-  //   const limit = req.query.limit;
-  //   const products = await productManager.getProducts();
-  //   if (limit !== undefined) {
-  //     const productsLimits = products.slice(0, limit);
-  //     res.send({ status: "success", products: productsLimits });
-  //     return;
-  //   }
-  //   return res.send({ status: "success", products: products });
-  // } catch (error) {
-  //   return res.send({ status: "error", error: error.message });
-  // }
 });
+// try {
+//   let products = await productModel.find().explain("executionStatus");
+//   console.log(products);
+//   res.send({
+//     status: "success",
+//     payload: products,
+//   });
+// } catch (error) {
+//   console.log(error);
+// }
+// try {
+//   const limit = req.query.limit;
+//   const products = await productManager.getProducts();
+//   if (limit !== undefined) {
+//     const productsLimits = products.slice(0, limit);
+//     res.send({ status: "success", products: productsLimits });
+//     return;
+//   }
+//   return res.send({ status: "success", products: products });
+// } catch (error) {
+//   return res.send({ status: "error", error: error.message });
+// }
+// });
 
 router.get("/:pid", async (req, res) => {
   try {
@@ -51,6 +102,10 @@ router.post("/", async (req, res) => {
       title: product.title,
       description: product.description,
       category: product.category,
+      price: product.price,
+      code: product.code,
+      category: product.category,
+      stock: product.stock,
     };
 
     let result = await productModel.create(newProduct);
@@ -79,7 +134,7 @@ router.post("/", async (req, res) => {
   //   res.status(404).send({ error: error.message });
   // }
 });
-
+// PUT http://localhost:8080 /products
 router.put("/:pid", async (req, res) => {
   const { pid } = req.params;
   const product = req.body;

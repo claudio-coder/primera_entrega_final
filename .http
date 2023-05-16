@@ -1,22 +1,74 @@
-GET http://localhost:8080/api/products
+
+###Productos
+GET http://localhost:8080/api/products/
 
 ###
 POST http://localhost:8080/api/products
 Content-Type: application/json
 
 {
-  "title": "BUENA ABUNDANTE COMIDA",
-  "description": "Comida para GATOS",
-  "category": "alimento"
+  "title": "Purina Exellent 700kg",
+  "description": "Comida para pajaros",
+  "price": 23490,
+  "thumbnail": "Sin imagen",
+  "code": "pur10K",
+  "category": "alimento",
+  "stock": 98
 }
 ###
-PUT http://localhost:8080/api/products/645bf99ae591c34b366d8123
+PUT http://localhost:8080/api/products/645ee35299a75d139ade8110
 Content-Type: application/json
 
 {
-  "title": "BUENA ABUNDANTE para jirafas",
-  "description": "Comida para peces",
-  "category": "alimento"
+  "title": "zazazazazas",
+  "description": "Comida para jhbvjhvuvj",
+  "category": "nbijhkbjhkbk"
 }
 ###
-DELETE http://localhost:8080/api/products/645bf99ae591c34b366d8123
+DELETE http://localhost:8080/api/products/645ee35299a75d139ade8110
+
+###Usuarios
+GET http://localhost:8080/api/usuarios/
+
+###
+POST http://localhost:8080/api/usuarios
+Content-Type: application/json
+
+{
+  "first_name": "Fulano78",
+  "last_name": "Sultano78",
+  "email":"jijiojiojiojh@gmail"
+}
+###
+PUT http://localhost:8080/api/usuarios/645edfc6c0b852644fcaf7d4
+Content-Type: application/json
+
+ {
+  "first_name": "Mengano",
+  "last_name": "Sultano",
+    "email":"Mengano@gmail.com"
+}
+###
+DELETE http://localhost:8080/api/usuarios/645edfc6c0b852644fcaf7d4
+###Carts
+GET http://localhost:8080/api/carts/6461956c3be21d68c630deed
+
+###
+POST http://localhost:8080/api/carts/6461956c3be21d68c630deed/product/645c2e58ddfbba6945704e24
+Content-Type: application/json
+
+{
+  "products": { "pid": "645c2e58ddfbba6945704e24"},
+  "quantity":45
+}
+###
+PUT http://localhost:8080/api/carts/645edfc6c0b852644fcaf7d4/
+Content-Type: application/json
+
+ {
+  "first_name": "Mengano",
+  "last_name": "Sultano",
+    "email":"Mengano@gmail.com"
+}
+###
+DELETE http://localhost:8080/api/carts/6462734c2cefb2e6c2b1381d

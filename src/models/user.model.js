@@ -1,4 +1,5 @@
-const { Schema, model } = require("mongoose");
+import { Schema, model } from "mongoose";
+import mongoosePaginate from "mongoose-paginate-v2";
 
 const collection = "usuarios";
 
@@ -15,6 +16,6 @@ const userSchema = new Schema({
   },
 });
 
-const userModel = model(collection, userSchema);
+userSchema.plugin(mongoosePaginate);
 
-model.exports = { userModel };
+export const userModel = model(collection, userSchema);

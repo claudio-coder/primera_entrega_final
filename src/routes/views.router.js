@@ -1,9 +1,9 @@
 import { Router } from "express";
-import { ProductManager } from "../ProductManager.js";
+import { ProductManager } from "../managerDaos/ProductManager.js";
 
 const router = Router();
 
-const productManager = new ProductManager("./src/products.json");
+const productManager = new ProductManager("./src/managerDaos/products.json");
 
 router.get("chat", (req, res) => {
   res.render("chat", {});
