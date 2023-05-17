@@ -35,25 +35,31 @@ router.get("/", async (req, res) => {
     );
     const {
       docs,
+      page: currentPage,
       totalPages,
       hasPrevPage,
       hasNextPage,
       prevPage,
       nextPage,
-      prevLink,
-      nextLink,
     } = products;
-    // res.render("product", {
+
+    console.log(products);
+    // res.render("products", {
     res.send({
       status: "success",
       products: docs,
       totalPages,
+      page: currentPage,
       prevPage,
       nextPage,
       hasPrevPage,
       hasNextPage,
-      prevLink,
-      nextLink,
+      prevLink: hasPrevPage
+        ? `http://localhost:8080/api/products?page=${currentPage - 1}`
+        : null,
+      nextLink: hasNextPage
+        ? `http://localhost:8080/api/products?page=${currentPage + 1}`
+        : null,
     });
   } catch (error) {
     console.log(error);
