@@ -1,13 +1,18 @@
 <div>
     <h1>Inyeccción de cookies</h1>
-    <form id="cookieForm" onsubmit="return false">
+    {{!-- <form id="cookieForm" onsubmit="return false"> --}}
+    <form id="cookieForm" action="/pruebas/session" method="POST">
         <label>Username</label>
         <input name="username">
         <br>
-        <label>Email</label>
-        <input name="email">
-        <input type="subnmit">
+        {{!-- <label>Email</label> --}}
+         <label>Password</label>
+        {{!-- <input name="email"> --}}
+        <input name="password">
+        {{!-- <input type="subnmit"> --}}
+           <button>Enviar</button>
+
     </form>
-    <button onclick="getCookie()">Ver Cookie</button>
+    {{!-- <button onclick="getCookie()">Ver Cookie</button> --}}
 </div>
-<script src="/static/js/cookieSetter.js"></script>
+{{!-- <script src="/static/js/cookieSetter.js"></script> --}}

@@ -1,4 +1,5 @@
 import express from "express";
+import session from "express-session";
 import cookieParser from "cookie-parser";
 import productsRouter from "./routes/products.router.js";
 import usersRouter from "./routes/users.router.js";
@@ -30,6 +31,14 @@ app.set("view engine", "handlebars");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.use(
+  session({
+    secret: "secretCoder",
+    resave: true,
+    saveUninitialized: true,
+  })
+);
 app.use(cookieParser("P@l@br@S3cr3t0"));
 
 app.use("/static", express.static(__dirname + "/public"));
