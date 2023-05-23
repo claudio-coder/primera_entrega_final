@@ -1,22 +1,24 @@
 
 ###Productos
 GET http://localhost:8080/api/products/
+###GET un Producto
+GET http://localhost:8080/api/products/6462c226c0b852644fcb0bf5
 
 ###
 POST http://localhost:8080/api/products
 Content-Type: application/json
 
 {
-  "title": "Purina Exellent 700kg",
+  "title": "Purina Exellent 9900kg",
   "description": "Comida para pajaros",
   "price": 23490,
   "thumbnail": "Sin imagen",
   "code": "pur10K",
   "category": "alimento",
-  "stock": 98
+  "stock": 298
 }
 ###
-PUT http://localhost:8080/api/products/645ee35299a75d139ade8110
+PUT http://localhost:8080/api/products/6462c226c0b852644fcb0bf4
 Content-Type: application/json
 
 {
@@ -25,7 +27,10 @@ Content-Type: application/json
   "category": "nbijhkbjhkbk"
 }
 ###
-DELETE http://localhost:8080/api/products/645ee35299a75d139ade8110
+DELETE http://localhost:8080/api/products/646553a20cb5c92d9c27a934
+
+
+
 
 ###Usuarios
 GET http://localhost:8080/api/usuarios/
@@ -50,17 +55,25 @@ Content-Type: application/json
 }
 ###
 DELETE http://localhost:8080/api/usuarios/645edfc6c0b852644fcaf7d4
+
+
+
 ###Carts
-GET http://localhost:8080/api/carts/6461956c3be21d68c630deed
+GET http://localhost:8080/api/carts/6462754c09ac9c48953d38cc
 
 ###
-POST http://localhost:8080/api/carts/6461956c3be21d68c630deed/product/645c2e58ddfbba6945704e24
-Content-Type: application/json
+POST http://localhost:8080/api/carts/6462754c09ac9c48953d38cc
 
-{
+products[products{
   "products": { "pid": "645c2e58ddfbba6945704e24"},
+
+},
+
+
   "quantity":45
-}
+
+]
+
 ###
 PUT http://localhost:8080/api/carts/645edfc6c0b852644fcaf7d4/
 Content-Type: application/json
@@ -71,4 +84,4 @@ Content-Type: application/json
     "email":"Mengano@gmail.com"
 }
 ###
-DELETE http://localhost:8080/api/carts/6462734c2cefb2e6c2b1381d
+DELETE http://localhost:8080/api/carts/6462754c09ac9c48953d38cc

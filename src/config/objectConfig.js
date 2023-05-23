@@ -13,15 +13,15 @@ console.log("Base de datos conectada");
 //     connect(url);
 //     console.log("Base de datos conectada");
 
-// crear un producto
-// await productModel.create({});
-// let productos = await productModel.find({});
-// console.log(productos);
+//     // crear un producto
+//     await productModel.create({});
+//     let productos = await productModel.find({});
+//     console.log(productos);
 
-//crear un carrito
-// await cartModel.create({
-//   products: [],
-// });
+//     // crear un carrito
+//     await cartModel.create({
+//       products: [],
+//     });
 //   } catch (error) {
 //     console.log(error);
 //   }
