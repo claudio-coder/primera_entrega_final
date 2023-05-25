@@ -43,7 +43,7 @@ router.get(
   // }
 );
 ////////////////////////////////
-router.post("/:cid", async (req, res) => {
+router.post("/:cid/product/:pid", async (req, res) => {
   try {
     // const { cid, pid } = req.params;
     const newCart = req.params;
