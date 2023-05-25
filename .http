@@ -59,13 +59,13 @@ DELETE http://localhost:8080/api/usuarios/645edfc6c0b852644fcaf7d4
 
 
 ###Carts
-GET http://localhost:8080/api/carts/646e957766a9bfc59e83e4e4
+GET http://localhost:8080/api/carts/646e947072046cf55435ba97
 
 ###
-POST http://localhost:8080/api/carts/646e957766a9bfc59e83e4e4
+POST http://localhost:8080/api/carts/6461956c3be21d68c630deed/products/645c2e58ddfbba6945704e24
 
 {
-  "email": "ejemplo@correo6.com",
+  "email": "ejemplo@correo68.com",
    "products": [
     {
       "product": "645c2e58ddfbba6945704e24",
