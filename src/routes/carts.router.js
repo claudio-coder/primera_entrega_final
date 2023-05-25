@@ -48,7 +48,7 @@ router.post("/:cid", async (req, res) => {
     // const { cid, pid } = req.params;
     const newCart = req.params;
 
-    let result = await cartModel.create(newCart);
+    let result = await cartModel.create(req.body);
 
     res.status(200).send({ result });
   } catch (error) {
