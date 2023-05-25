@@ -54,7 +54,6 @@ router.post("/:cid/product/:pid", async (req, res) => {
   } catch (error) {
     console.log(error);
   }
-
   // try {
   //   const cart = await cartManager.updateProductCartById(
   //     Number(cid),
