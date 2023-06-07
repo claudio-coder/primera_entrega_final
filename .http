@@ -85,3 +85,12 @@ Content-Type: application/json
 }
 ###
 DELETE http://localhost:8080/api/carts/6462754d09ac9c48953d38ce
+
+###
+POST http://localhost:8080/pruebas/session
+Content-Type: application/json
+
+{
+  "username": "claudio",
+  "password":"claudio1963"
+}

@@ -1,15 +1,12 @@
 import { Router } from "express";
+import { auth } from "../middlewares/autenticacion.middlewar.js";
 import { userModel } from "../models/user.model.js";
 
 // obj
 const router = Router();
 
-router.get("/", async (req, res) => {
+router.get("/", auth, async (req, res) => {
   try {
-    // let users = await userModel.find().explain("executionStatus");
-    // let users = await userModel.find({ first_name: "Celia" });
-    // console.log(users[0].id.toString());
-    // let users = await userModel.find({});
     const { page = 1 } = req.query;
 
     let users = await userModel.paginate(

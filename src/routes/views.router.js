@@ -1,17 +1,31 @@
 import { Router } from "express";
-import { ProductManager } from "../managerDaos/ProductManager.js";
+import { productModel } from "../models/product.model.js";
 
 const router = Router();
 
-const productManager = new ProductManager("./src/managerDaos/products.json");
+router.get("/", (req, res) => {
+  res.redirect("/login");
+});
+
+router.get("/login", (req, res) => {
+  res.render("login", {
+    style: "index.css",
+  });
+});
+
+router.get("/register", (req, res) => {
+  res.render("registerForm", {
+    style: "index.css",
+  });
+});
 
 router.get("chat", (req, res) => {
   res.render("chat", {});
 });
 
-router.get("/", async (req, res) => {
-  const products = await productManager.getProducts();
-  res.render("index", { products });
+router.get("/products", async (req, res) => {
+  const products = await productModel.find({}).lean();
+  res.render("index", { products, user: req.session.user });
 });
 
 router.get("/realtimeproducts", async (req, res) => {

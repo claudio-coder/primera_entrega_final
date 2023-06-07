@@ -11,6 +11,9 @@ import pruebasRouter from "./routes/pruebas.router.js";
 import { ProductManager } from "./managerDaos/ProductManager.js";
 import { connectDB } from "./config/objectConfig.js";
 import __dirname from "./dirname.js";
+import FileStore from "session-file-store";
+import MongoStore from "connect-mongo";
+import sessionRouter from "./routes/session.router.js";
 
 const PORT = 8080;
 const app = express();
@@ -32,14 +35,49 @@ app.set("view engine", "handlebars");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.use(cookieParser("P@l@br@S3cr3t0"));
+
+// const fileStore = FileStore(session);
+
+// app.use(
+//   session({
+//     store: new fileStore({
+//       ttl: 100000 * 60,
+//       path: "./session",
+//       retries: 0,
+//     }),
+
+//     secret: "secretCoder",
+//     resave: true,
+//     saveUninitialized: true,
+//   })
+// );
+
 app.use(
   session({
+    store: MongoStore.create({
+      mongoUrl:
+        "mongodb+srv://ccabanas:0801MJmv@cluster0.1e2x8x2.mongodb.net/CentroMedicoVeterinario?retryWrites=true&w=majority",
+      mongoOptions: {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      },
+      ttl: 100000 * 60,
+    }),
+
     secret: "secretCoder",
-    resave: true,
-    saveUninitialized: true,
+    resave: false,
+    saveUninitialized: false,
   })
 );
-app.use(cookieParser("P@l@br@S3cr3t0"));
+
+// app.use(
+//   session({
+//     secret: "secretCoder",
+//     resave: true,
+//     saveUninitialized: true,
+//   })
+// );
 
 app.use("/static", express.static(__dirname + "/public"));
 
@@ -47,6 +85,7 @@ app.use("/api/products", productsRouter);
 app.use("/api/usuarios", usersRouter);
 app.use("/api/carts", cartsRouter);
 app.use("/", viewsRouter);
+app.use("/api/session", sessionRouter);
 
 app.use("/pruebas", pruebasRouter);
 
@@ -54,4 +93,8 @@ io.on("connection", async (socket) => {
   console.log("Nuevo cliente conectado");
   const products = await productManager.getProducts();
   socket.emit("products", products);
+});
+app.use((err, req, res, next) => {
+  console.log(err);
+  res.status(500).send("Todo mal");
 });

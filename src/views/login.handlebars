@@ -1,9 +1,11 @@
 <div>
-    <h1>Inyeccción de cookies</h1>
+    <h1>Ingrese sus datos / si es por primera vez Registrese</h1>
     {{!-- <form id="cookieForm" onsubmit="return false"> --}}
-    <form id="cookieForm" action="/pruebas/session" method="POST">
-        <label>Username</label>
-        <input name="username">
+    {{!-- <form id="cookieForm" action="/session/login" method="POST"> --}}
+        <form action="/api/session/login" method="POST">
+
+        <label>Email</label>
+        <input name="email">
         <br>
         {{!-- <label>Email</label> --}}
          <label>Password</label>

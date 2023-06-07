@@ -44,7 +44,7 @@ router.get("/", async (req, res) => {
     } = products;
 
     console.log(products);
-    // res.render("products", {
+
     res.send({
       status: "success",
       products: docs,
@@ -65,29 +65,6 @@ router.get("/", async (req, res) => {
     console.log(error);
   }
 });
-// try {
-//   let products = await productModel.find().explain("executionStatus");
-//   console.log(products);
-//   res.send({
-//     status: "success",
-//     payload: products,
-//   });
-// } catch (error) {
-//   console.log(error);
-// }
-// try {
-//   const limit = req.query.limit;
-//   const products = await productManager.getProducts();
-//   if (limit !== undefined) {
-//     const productsLimits = products.slice(0, limit);
-//     res.send({ status: "success", products: productsLimits });
-//     return;
-//   }
-//   return res.send({ status: "success", products: products });
-// } catch (error) {
-//   return res.send({ status: "error", error: error.message });
-// }
-// });
 
 router.get("/:pid", async (req, res) => {
   try {

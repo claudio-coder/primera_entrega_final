@@ -1,6 +1,13 @@
 <div>
+    <h2>Bienvenido</h2>
+    {{user.first_name}}
+    {{user.last_name}}
+    {{user.role}}
+
+
     <h2>Productos</h2>
     <hr>
+
     {{#each products}}
         <ul>
             <li>Producto: {{this.title}}</li>
