@@ -36,13 +36,24 @@ DELETE http://localhost:8080/api/products/646553a20cb5c92d9c27a934
 GET http://localhost:8080/api/usuarios/
 
 ###
-POST http://localhost:8080/api/usuarios
+POST http://localhost:8080/api/session/login
 Content-Type: application/json
 
 {
-  "first_name": "Fulano78",
-  "last_name": "Sultano78",
-  "email":"jijiojiojiojh@gmail"
+  "email":"claudio0123@gmail.com",
+  "password": "claudio60"
+}
+
+###
+POST http://localhost:8080/api/session/register
+Content-Type: application/json
+
+{
+  "first_name": "Fulano82",
+  "last_name": "Sultano82",
+  "email":"claudio0123@gmail.com",
+  "password": "claudio60",
+  "role": "usuario"
 }
 ###
 PUT http://localhost:8080/api/usuarios/645edfc6c0b852644fcaf7d4

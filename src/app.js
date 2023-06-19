@@ -14,6 +14,8 @@ import __dirname from "./dirname.js";
 import FileStore from "session-file-store";
 import MongoStore from "connect-mongo";
 import sessionRouter from "./routes/session.router.js";
+import { initPassport } from "./config/passport.config.js";
+import passport from "passport";
 
 const PORT = 8080;
 const app = express();
@@ -70,6 +72,10 @@ app.use(
     saveUninitialized: false,
   })
 );
+
+initPassport();
+passport.use(passport.initialize());
+passport.use(passport.session());
 
 // app.use(
 //   session({

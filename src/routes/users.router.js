@@ -34,11 +34,14 @@ router.post("/", async (req, res) => {
     const user = req.body;
 
     const newUser = {
-      first_name: user.name,
+      first_name: user.first_name,
       last_name: user.last_name,
       email: user.email,
+      password: user.password,
+      role: user.role,
     };
     let result = await userModel.create(newUser);
+    console.log(result);
     res.status(200).send({ result });
   } catch (error) {
     console.log(error);
