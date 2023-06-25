@@ -2,6 +2,7 @@ import { Router } from "express";
 // import { ProductManager } from "../managerDaos/ProductManager.js";
 // import { io } from "../app.js";
 import { productModel } from "../models/product.model.js";
+import { authToken } from "../utils/jwt.js";
 
 // const productManager = new ProductManager("./src/managerDaos/products.json");
 
@@ -9,7 +10,7 @@ const router = Router();
 
 const SORT = { asc: 1, desc: -1 };
 
-router.get("/", async (req, res) => {
+router.get("/", authToken, async (req, res) => {
   try {
     // let users = await userModel.find().explain("executionStatus");
     // let users = await userModel.find({ first_name: "Celia" });

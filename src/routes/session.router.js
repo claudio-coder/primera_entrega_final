@@ -3,6 +3,7 @@ import passport from "passport";
 import { auth } from "../middlewares/autenticacion.middlewar.js";
 import { userModel } from "../models/user.model.js";
 import { isValidPassword, createHash } from "../utils/bcryptHash.js";
+import { generateToken } from "../utils/jwt.js";
 
 const router = Router();
 
@@ -42,42 +43,67 @@ router.post("/login", async (req, res) => {
   res.redirect("/products");
 });
 
-// router.post("/register", async (req, res) => {
-//   const { username, first_name, last_name, email, password } = req.body;
+router.post("/register", async (req, res) => {
+  const { username, first_name, last_name, email, password } = req.body;
 
-//   const existUser = await userModel.findOne({ email });
+  const existUser = await userModel.findOne({ email });
 
-//   if (existUser) {
-//     return res.send({
-//       status: "error",
-//       message: "el email ya esta registrado",
-//     });
-//   }
+  if (existUser) {
+    return res.send({
+      status: "error",
+      message: "el email ya esta registrado",
+    });
+  }
 
-//   const role =
-//     email === "adminCoder@coder.com" && password === "adminCod3r123"
-//       ? "admin"
-//       : "usuario";
+  const role =
+    email === "adminCoder@coder.com" && password === "adminCod3r123"
+      ? "admin"
+      : "usuario";
 
-//   const hashedPassword = createHash(password);
+  const hashedPassword = createHash(password);
 
-//   const newUser = {
-//     username,
-//     first_name,
-//     last_name,
-//     email,
-//     password: hashedPassword,
-//     role,
-//   };
+  const newUser = {
+    username,
+    first_name,
+    last_name,
+    email,
+    password: hashedPassword,
+    role,
+  };
 
-//   let resultUser = await userModel.create(newUser);
+  let resultUser = await userModel.create(newUser);
 
-//   console.log(hashedPassword);
+  console.log(hashedPassword);
 
-//   res
-//     .status(200)
-//     .send({ status: "success", message: "Usuario creado correctamente" });
-// });
+  res
+    .status(200)
+    .send({ status: "success", message: "Usuario creado correctamente" });
+});
+
+// LOGIN;
+router.post(
+  "/login",
+  passport.authenticate("login", {
+    failureRedirect: "/faillogin",
+  }),
+  async (req, res) => {
+    if (!req.user)
+      return res
+        .status(401)
+        .send({ status: "error", message: "invalid credencial" });
+    req.session.user = {
+      first_name: req.user.first_name,
+      last_name: req.user.last_name,
+      email: req.user.email,
+    };
+    res.send({ status: "success", message: "User registered" });
+  }
+);
+
+router.get("/faillogin", async (req, res) => {
+  console.log("Fallo la estrategia");
+  res.send({ status: "error", error: "fallo autenticación" });
+});
 
 router.post(
   "/register",
@@ -89,10 +115,74 @@ router.post(
   }
 );
 
+router.get("/faillogin", async (req, res) => {
+  console.log("Fallo la estrategia");
+  res.send({ status: "error", error: "fallo autenticación" });
+});
+
 router.get("/failregister", async (req, res) => {
   console.log("Fallo la estrategia");
   res.send({ status: "error", error: "fallo autenticación" });
 });
+
+///GITHUB
+
+router.get(
+  "/github",
+  passport.authenticate("github", { scope: ["user:email"] }),
+  async (req, res) => {}
+);
+
+router.get(
+  "/githubcallback",
+  passport.authenticate("github", { failureRedirect: "/login" }),
+  async (req, res) => {
+    req.session.user = req.user;
+    res.redirect("/api/products");
+  }
+);
+
+//////////////////////////////////////////////////
+//TOKEN
+
+// router.post("/login", async (req, res) => {
+//   const { email, password } = req.body;
+
+//   const access_token = generateToken({
+//     first_name: "Claudio",
+//     last_name: "Cabanas",
+//     email: "claudiocabanas@gmail.com",
+//   });
+
+//   res.send({
+//     status: "success",
+//     message: "login success",
+//     access_token,
+//   });
+
+// });
+
+// router.post("/register", async (req, res) => {
+//   try {
+//     const { username, first_name, last_name, email, password } = req.body;
+
+//     let token = generateToken({
+//       first_name: "Claudio",
+//       last_name: "Cabanas",
+//       email: "claudiocabanas@gmail.com",
+//     });
+
+//     res.status(200).send({
+//       status: "success",
+//       message: "Usuario creado correctamente",
+//       token,
+//     });
+//   } catch (error) {
+//     console.log(error);
+//   }
+// });
+
+////////////////////////////////////////////////////////////////
 
 router.get("/logout", (req, res) => {
   req.session.destroy((err) => {

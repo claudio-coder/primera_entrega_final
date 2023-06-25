@@ -14,7 +14,7 @@ import __dirname from "./dirname.js";
 import FileStore from "session-file-store";
 import MongoStore from "connect-mongo";
 import sessionRouter from "./routes/session.router.js";
-import { initPassport } from "./config/passport.config.js";
+import { initPassport, initPassportGithub } from "./config/passport.config.js";
 import passport from "passport";
 
 const PORT = 8080;
@@ -74,6 +74,7 @@ app.use(
 );
 
 initPassport();
+initPassportGithub();
 passport.use(passport.initialize());
 passport.use(passport.session());
 

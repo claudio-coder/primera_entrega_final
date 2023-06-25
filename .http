@@ -1,3 +1,8 @@
+###Productos con Token
+GET http://localhost:8080/api/products/
+Content-Type: application/json
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImZpcnN0X25hbWUiOiJDbGF1ZGlvIiwibGFzdF9uYW1lIjoiQ2FiYW5hcyIsImVtYWlsIjoiY2xhdWRpb2NhYmFuYXNAZ21haWwuY29tIn0sImlhdCI6MTY4NzcxNTcxMiwiZXhwIjoxNjg3ODAyMTEyfQ.uSjJlEuwKh3qD_hzsWIFbeYTxafUKvFBNphYyJ7C4sc
+
 
 ###Productos
 GET http://localhost:8080/api/products/
@@ -40,8 +45,8 @@ POST http://localhost:8080/api/session/login
 Content-Type: application/json
 
 {
-  "email":"claudio0123@gmail.com",
-  "password": "claudio60"
+  "email":"claudiocabanas@gmail.com",
+  "password": "claudio123"
 }
 
 ###
@@ -51,8 +56,8 @@ Content-Type: application/json
 {
   "first_name": "Fulano82",
   "last_name": "Sultano82",
-  "email":"claudio0123@gmail.com",
-  "password": "claudio60",
+  "email":"claudiocc0123789@gmail.com",
+  "password": "claudio123",
   "role": "usuario"
 }
 ###
