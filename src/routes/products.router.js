@@ -10,7 +10,7 @@ const router = Router();
 
 const SORT = { asc: 1, desc: -1 };
 
-router.get("/", authToken, async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     // let users = await userModel.find().explain("executionStatus");
     // let users = await userModel.find({ first_name: "Celia" });
