@@ -2,6 +2,8 @@ import { Router } from "express";
 import passport from "passport";
 import { auth } from "../middlewares/autenticacion.middlewar.js";
 import { userModel } from "../models/user.model.js";
+import { authorization } from "../passport-jwt/authorizationJwtRole.js";
+import { passportCall } from "../passport-jwt/passportCall.js";
 import { isValidPassword, createHash } from "../utils/bcryptHash.js";
 import { generateToken } from "../utils/jwt.js";
 
@@ -152,12 +154,18 @@ router.post("/login", async (req, res) => {
     first_name: "Claudio",
     last_name: "Cabanas",
     email: "claudiocabanas@gmail.com",
+    role: "user",
   });
 
-  res.cookie("coderCookieToken", access_token, { maxAge: 60 * 60 * 100 }).send({
-    status: "success",
-    message: "login success",
-  });
+  res
+    .cookie("coderCookieToken", access_token, {
+      maxAge: 60 * 60 * 100,
+      httpOnly: true,
+    })
+    .send({
+      status: "success",
+      message: "login success",
+    });
 
   // res.send({
   //   status: "success",
@@ -165,6 +173,15 @@ router.post("/login", async (req, res) => {
   //   access_token,
   // });
 });
+
+router.get(
+  "/current",
+  passportCall("jwt"),
+  authorization("user"),
+  (req, res) => {
+    res.send(req.user);
+  }
+);
 
 router.post("/register", async (req, res) => {
   try {

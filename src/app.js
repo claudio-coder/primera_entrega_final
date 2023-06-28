@@ -14,7 +14,8 @@ import __dirname from "./dirname.js";
 import FileStore from "session-file-store";
 import MongoStore from "connect-mongo";
 import sessionRouter from "./routes/session.router.js";
-import { initPassport, initPassportGithub } from "./config/passport.config.js";
+// import { initPassport, initPassportGithub } from "./config/passport.config.js";
+import { initPassport } from "./passport-jwt/passport.config.js";
 import passport from "passport";
 
 const PORT = 8080;
@@ -55,28 +56,28 @@ app.use(cookieParser("P@l@br@S3cr3t0"));
 //   })
 // );
 
-app.use(
-  session({
-    store: MongoStore.create({
-      mongoUrl:
-        "mongodb+srv://ccabanas:0801MJmv@cluster0.1e2x8x2.mongodb.net/CentroMedicoVeterinario?retryWrites=true&w=majority",
-      mongoOptions: {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-      },
-      ttl: 100000 * 60,
-    }),
+// app.use(
+//   session({
+//     store: MongoStore.create({
+//       mongoUrl:
+//         "mongodb+srv://ccabanas:0801MJmv@cluster0.1e2x8x2.mongodb.net/CentroMedicoVeterinario?retryWrites=true&w=majority",
+//       mongoOptions: {
+//         useNewUrlParser: true,
+//         useUnifiedTopology: true,
+//       },
+//       ttl: 100000 * 60,
+//     }),
 
-    secret: "secretCoder",
-    resave: false,
-    saveUninitialized: false,
-  })
-);
+//     secret: "secretCoder",
+//     resave: false,
+//     saveUninitialized: false,
+//   })
+// );
 
 initPassport();
-initPassportGithub();
+// initPassportGithub();
 passport.use(passport.initialize());
-passport.use(passport.session());
+// passport.use(passport.session());
 
 // app.use(
 //   session({

@@ -25,6 +25,7 @@ export const authToken = (req, res, next) => {
         error: "Not authorized",
       });
     req.user = credential.user;
+    console.log("EEEEED", req.user);
     next();
   });
 };

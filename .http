@@ -110,3 +110,8 @@ Content-Type: application/json
   "username": "claudio",
   "password":"claudio1963"
 }
+
+###
+GET http://localhost:8080/api/session/current
+Content-Type: application/json
+

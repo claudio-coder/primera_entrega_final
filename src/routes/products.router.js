@@ -1,4 +1,5 @@
 import { Router } from "express";
+import passport from "passport";
 // import { ProductManager } from "../managerDaos/ProductManager.js";
 // import { io } from "../app.js";
 import { productModel } from "../models/product.model.js";
@@ -10,62 +11,66 @@ const router = Router();
 
 const SORT = { asc: 1, desc: -1 };
 
-router.get("/", async (req, res) => {
-  try {
-    // let users = await userModel.find().explain("executionStatus");
-    // let users = await userModel.find({ first_name: "Celia" });
-    // console.log(users[0].id.toString());
-    // let users = await userModel.find({});
-    // const { page = 1 } = req.query;
-    // const page = req.query.page;
+router.get(
+  "/",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
+    try {
+      // let users = await userModel.find().explain("executionStatus");
+      // let users = await userModel.find({ first_name: "Celia" });
+      // console.log(users[0].id.toString());
+      // let users = await userModel.find({});
+      // const { page = 1 } = req.query;
+      // const page = req.query.page;
 
-    const limit = req.query.limit;
+      const limit = req.query.limit;
 
-    const page = req.query.page;
+      const page = req.query.page;
 
-    const sortParam = req.query.sort;
+      const sortParam = req.query.sort;
 
-    let products = await productModel.paginate(
-      {},
-      {
-        limit: !!limit ? limit : 10,
-        page: !!page ? page : 1,
-        lean: true,
-        sort: !!SORT[sortParam] ? { price: SORT[sortParam] } : undefined,
-      }
-    );
-    const {
-      docs,
-      page: currentPage,
-      totalPages,
-      hasPrevPage,
-      hasNextPage,
-      prevPage,
-      nextPage,
-    } = products;
+      let products = await productModel.paginate(
+        {},
+        {
+          limit: !!limit ? limit : 10,
+          page: !!page ? page : 1,
+          lean: true,
+          sort: !!SORT[sortParam] ? { price: SORT[sortParam] } : undefined,
+        }
+      );
+      const {
+        docs,
+        page: currentPage,
+        totalPages,
+        hasPrevPage,
+        hasNextPage,
+        prevPage,
+        nextPage,
+      } = products;
 
-    console.log(products);
+      console.log(products);
 
-    res.send({
-      status: "success",
-      products: docs,
-      totalPages,
-      page: currentPage,
-      prevPage,
-      nextPage,
-      hasPrevPage,
-      hasNextPage,
-      prevLink: hasPrevPage
-        ? `http://localhost:8080/api/products?page=${currentPage - 1}`
-        : null,
-      nextLink: hasNextPage
-        ? `http://localhost:8080/api/products?page=${currentPage + 1}`
-        : null,
-    });
-  } catch (error) {
-    console.log(error);
+      res.send({
+        status: "success",
+        products: docs,
+        totalPages,
+        page: currentPage,
+        prevPage,
+        nextPage,
+        hasPrevPage,
+        hasNextPage,
+        prevLink: hasPrevPage
+          ? `http://localhost:8080/api/products?page=${currentPage - 1}`
+          : null,
+        nextLink: hasNextPage
+          ? `http://localhost:8080/api/products?page=${currentPage + 1}`
+          : null,
+      });
+    } catch (error) {
+      console.log(error);
+    }
   }
-});
+);
 
 router.get("/:pid", async (req, res) => {
   try {
