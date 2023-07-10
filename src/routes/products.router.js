@@ -16,13 +16,6 @@ router.get(
   passport.authenticate("jwt", { session: false }),
   async (req, res) => {
     try {
-      // let users = await userModel.find().explain("executionStatus");
-      // let users = await userModel.find({ first_name: "Celia" });
-      // console.log(users[0].id.toString());
-      // let users = await userModel.find({});
-      // const { page = 1 } = req.query;
-      // const page = req.query.page;
-
       const limit = req.query.limit;
 
       const page = req.query.page;

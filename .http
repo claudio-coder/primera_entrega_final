@@ -115,3 +115,19 @@ Content-Type: application/json
 GET http://localhost:8080/api/session/current
 Content-Type: application/json
 
+###
+GET http://localhost:8080/pruebas/params/afgtnYUTRE
+Content-Type: application/json
+
+###
+POST http://localhost:8080/api/pets
+Content-Type: application/json
+
+{
+  "name": "gaturro",
+  "specie":"gato"
+}
+
+###
+GET http://localhost:8080/api/pets/params/narita
+Content-Type: application/json

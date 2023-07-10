@@ -18,6 +18,9 @@ import sessionRouter from "./routes/session.router.js";
 import { initPassport } from "./passport-jwt/passport.config.js";
 import passport from "passport";
 
+//////////PETS/////////
+import petsRouter from "./routes/pets.router.js";
+
 const PORT = 8080;
 const app = express();
 
@@ -94,6 +97,9 @@ app.use("/api/usuarios", usersRouter);
 app.use("/api/carts", cartsRouter);
 app.use("/", viewsRouter);
 app.use("/api/session", sessionRouter);
+
+////////////PETS////////////
+app.use("/api/pets", petsRouter);
 
 app.use("/pruebas", pruebasRouter);
 
