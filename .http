@@ -115,3 +115,6 @@ Content-Type: application/json
 GET http://localhost:8080/api/session/current
 Content-Type: application/json
 
+###
+GET http://localhost:8080/pruebas/params/wvwrv66
+Content-Type: application/json

@@ -3,6 +3,34 @@ import { auth } from "../middlewares/autenticacion.middlewar.js";
 
 const router = Router();
 
+router.get("/params/:nombre([a-zA-Z]+)", (req, res) => {
+  res.send({
+    message: req.params.nombre,
+  });
+});
+
+router.get("/params/:nombre([a-zA-Z]+)/:apellido", (req, res) => {
+  res.send({
+    message: req.params.nombre,
+  });
+});
+
+router.put("/params/:nombre([a-zA-Z]+)", (req, res) => {
+  res.send({
+    message: req.params.nombre,
+  });
+});
+
+router.delete("/params/:nombre([a-zA-Z]+)", (req, res) => {
+  res.send({
+    message: req.params.nombre,
+  });
+});
+
+router.get("*", (req, res) => {
+  res.send("404 Not found");
+});
+
 router.get("/", (req, res) => {
   res.render("login", {});
 });
