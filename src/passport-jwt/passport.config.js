@@ -21,6 +21,7 @@ export const initPassport = () => {
       {
         jwtFromRequest: ExtractJWT.fromExtractors([cookieExtractor]),
         secretOrKey: "palabraJwtSecreto",
+        // secretOrKey: objectConfig.jwt_secret_key,
       },
       async (jwt_payload, done) => {
         try {

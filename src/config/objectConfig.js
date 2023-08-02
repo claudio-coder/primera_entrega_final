@@ -2,9 +2,10 @@ import { connect } from "mongoose";
 import { cartModel } from "../models/cart.model.js";
 import { productModel } from "../models/product.model.js";
 
+// export const jwt_secret_key = "palabraJwtSecreto";
+
 let url =
   "mongodb+srv://ccabanas:0801MJmv@cluster0.1e2x8x2.mongodb.net/CentroMedicoVeterinario?retryWrites=true&w=majority";
-// export const jwt_secret_key = "palabraJwtSecreto";
 export const connectDB = () => connect(url);
 console.log("Base de datos conectada");
 
